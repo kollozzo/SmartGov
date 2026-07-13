@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginVertical="4dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/card_surface"
+    app:strokeColor="@color/divider"
+    app:strokeWidth="0.5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="14dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/iconContainer"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            app:cardBackgroundColor="@color/md_primary_container"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iconCatalog"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Icono"
+                android:padding="8dp"
+                android:src="@android:drawable/ic_menu_edit"
+                android:tint="@color/md_primary" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/textCatalogName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:gravity="center_vertical"
+            android:text="Nombre del registro"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            android:textColor="@color/md_on_surface"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iconArrow"
+            app:layout_constraintStart_toEndOf="@id/iconContainer"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageSyncStatus"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:contentDescription="Sync Status"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iconArrow"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#4CAF50" />
+
+        <TextView
+            android:id="@+id/textSyncStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="Ok"
+            android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+            android:textColor="#4CAF50"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/imageSyncStatus"
+            app:layout_constraintEnd_toStartOf="@id/imageSyncStatus"
+            app:layout_constraintTop_toTopOf="@id/imageSyncStatus" />
+
+        <ImageView
+            android:id="@+id/iconArrow"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:contentDescription="Editar"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/md_outline" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

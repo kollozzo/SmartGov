@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.SmartGov.ui.BandejaDerivacionesFragment"
+        android:label="Bandeja de Entrada"
+        tools:layout="@layout/fragment_bandeja">
+        <action
+            android:id="@+id/action_nav_home_to_nav_detalle_derivacion"
+            app:destination="@id/nav_detalle_derivacion" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_registrar_documento"
+        android:name="com.example.SmartGov.ui.RegistrarDocumentoFragment"
+        android:label="Registrar Documento"
+        tools:layout="@layout/fragment_registrar_documento" />
+
+    <fragment
+        android:id="@+id/nav_detalle_derivacion"
+        android:name="com.example.SmartGov.ui.DetalleDerivacionFragment"
+        android:label="Detalle de Derivación"
+        tools:layout="@layout/fragment_detalle_derivacion" />
+
+    <fragment
+        android:id="@+id/nav_oficinas"
+        android:name="com.example.SmartGov.ui.GenericCatalogFragment"
+        android:label="Oficinas"
+        tools:layout="@layout/fragment_generic_catalog">
+        <argument
+            android:name="tableName"
+            android:defaultValue="oficinas" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_tipos_documentos"
+        android:name="com.example.SmartGov.ui.GenericCatalogFragment"
+        android:label="Tipos Documentos"
+        tools:layout="@layout/fragment_generic_catalog">
+        <argument
+            android:name="tableName"
+            android:defaultValue="tipos_documentos" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_administrados"
+        android:name="com.example.SmartGov.ui.GenericCatalogFragment"
+        android:label="Administrados"
+        tools:layout="@layout/fragment_generic_catalog">
+        <argument
+            android:name="tableName"
+            android:defaultValue="administrados" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_personal"
+        android:name="com.example.SmartGov.ui.GenericCatalogFragment"
+        android:label="Personal"
+        tools:layout="@layout/fragment_generic_catalog">
+        <argument
+            android:name="tableName"
+            android:defaultValue="personal_especialistas" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_expedientes"
+        android:name="com.example.SmartGov.ui.GenericCatalogFragment"
+        android:label="Expedientes"
+        tools:layout="@layout/fragment_generic_catalog">
+        <argument
+            android:name="tableName"
+            android:defaultValue="expedientes_generales" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_archivo_fisico"
+        android:name="com.example.SmartGov.ui.GenericCatalogFragment"
+        android:label="Archivo Físico"
+        tools:layout="@layout/fragment_generic_catalog">
+        <argument
+            android:name="tableName"
+            android:defaultValue="archivo_fisico_central" />
+    </fragment>
+
+</navigation>

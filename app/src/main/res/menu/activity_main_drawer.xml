@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="Bandeja de Entrada" />
+        <item
+            android:id="@+id/nav_registrar_documento"
+            android:icon="@android:drawable/ic_menu_add"
+            android:title="Registrar Documento" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_oficinas"
+            android:icon="@android:drawable/ic_menu_directions"
+            android:title="Oficinas" />
+        <item
+            android:id="@+id/nav_tipos_documentos"
+            android:icon="@android:drawable/ic_menu_sort_by_size"
+            android:title="Tipos Documentos" />
+        <item
+            android:id="@+id/nav_administrados"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="Administrados" />
+        <item
+            android:id="@+id/nav_personal"
+            android:icon="@android:drawable/ic_menu_my_calendar"
+            android:title="Personal" />
+        <item
+            android:id="@+id/nav_expedientes"
+            android:icon="@android:drawable/ic_menu_compass"
+            android:title="Expedientes" />
+        <item
+            android:id="@+id/nav_archivo_fisico"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="Archivo Físico" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_sync"
+            android:icon="@android:drawable/ic_popup_sync"
+            android:title="Sincronizar Ahora" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@android:drawable/ic_menu_close_clear_cancel"
+            android:title="Cerrar Sesión" />
+    </group>
+</menu>
