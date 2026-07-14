@@ -1,7 +1,7 @@
-package com.example.SmartGov.network;
+package com.example.smartgov.network;
 
-import com.example.SmartGov.model.AuthRequest;
-import com.example.SmartGov.model.AuthResponse;
+import com.example.smartgov.model.AuthRequest;
+import com.example.smartgov.model.AuthResponse;
 import com.google.gson.JsonObject;
 import retrofit2.Call;
 import retrofit2.http.Body;

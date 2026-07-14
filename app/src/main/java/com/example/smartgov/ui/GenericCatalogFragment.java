@@ -1,4 +1,4 @@
-package com.example.SmartGov.ui;
+package com.example.smartgov.ui;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -26,9 +26,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.SmartGov.R;
-import com.example.SmartGov.database.DatabaseHelper;
-import com.example.SmartGov.databinding.FragmentGenericCatalogBinding;
+import com.example.smartgov.R;
+import com.example.smartgov.database.DatabaseHelper;
+import com.example.smartgov.databinding.FragmentGenericCatalogBinding;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -92,14 +92,14 @@ public class GenericCatalogFragment extends Fragment {
                 new String[]{"codigo_oficina", "siglas_oficiales", "nombre_unidad"},
                 new String[]{"Código Oficina", "Siglas", "Nombre de Unidad"},
                 new int[]{TYPE_TEXT, TYPE_TEXT, TYPE_TEXT},
-                false, null, android.R.drawable.ic_menu_directions));
+                true, null, android.R.drawable.ic_menu_directions));
 
         CONFIGS.put(DatabaseHelper.TABLE_TIPOS_DOCUMENTOS, new CatalogConfig(
                 DatabaseHelper.TABLE_TIPOS_DOCUMENTOS, "id_tipo_documento", "nombre_tipo_documento",
                 new String[]{"nombre_tipo_documento"},
                 new String[]{"Nombre Tipo Documento"},
                 new int[]{TYPE_TEXT},
-                false, null, android.R.drawable.ic_menu_sort_by_size));
+                true, null, android.R.drawable.ic_menu_sort_by_size));
 
         CONFIGS.put(DatabaseHelper.TABLE_ADMINISTRADOS, new CatalogConfig(
                 DatabaseHelper.TABLE_ADMINISTRADOS, "id_administrado", "nombre_razon_social",
@@ -113,7 +113,7 @@ public class GenericCatalogFragment extends Fragment {
                 new String[]{"codigo_empleado", "nombre_completo", "cargo", "id_oficina"},
                 new String[]{"Código Empleado", "Nombre Completo", "Cargo", "Oficina"},
                 new int[]{TYPE_TEXT, TYPE_TEXT, TYPE_TEXT, TYPE_INTEGER},
-                false,
+                true,
                 new ForeignKeyConfig("id_oficina", DatabaseHelper.TABLE_OFICINAS, "id_oficina", "nombre_unidad"),
                 android.R.drawable.ic_menu_gallery));
 
@@ -129,7 +129,16 @@ public class GenericCatalogFragment extends Fragment {
                 new String[]{"codigo_almacen", "nro_pabellon", "nro_estante", "nro_caja_fisica"},
                 new String[]{"Código Almacén", "Nro Pabellón", "Nro Estante", "Nro Caja Física"},
                 new int[]{TYPE_TEXT, TYPE_INTEGER, TYPE_INTEGER, TYPE_INTEGER},
-                false, null, android.R.drawable.ic_menu_gallery));
+                true, null, android.R.drawable.ic_menu_gallery));
+
+        CONFIGS.put(DatabaseHelper.TABLE_DIRECCIONES, new CatalogConfig(
+                DatabaseHelper.TABLE_DIRECCIONES, "id_direccion", "calle",
+                new String[]{"id_administrado", "tipo_inmueble", "calle", "numero", "comuna_distrito", "ciudad"},
+                new String[]{"Administrado", "Tipo Inmueble", "Calle", "Número", "Comuna/Distrito", "Ciudad"},
+                new int[]{TYPE_INTEGER, TYPE_TEXT, TYPE_TEXT, TYPE_TEXT, TYPE_TEXT, TYPE_TEXT},
+                true,
+                new ForeignKeyConfig("id_administrado", DatabaseHelper.TABLE_ADMINISTRADOS, "id_administrado", "nombre_razon_social"),
+                android.R.drawable.ic_menu_mylocation));
     }
 
     private FragmentGenericCatalogBinding binding;
@@ -165,9 +174,9 @@ public class GenericCatalogFragment extends Fragment {
 
         binding.fabAddCatalog.setOnClickListener(v -> showBottomSheet(-1));
         binding.listViewCatalog.setOnItemClickListener((parent, v, position, id) ->
-                showBottomSheet(idList.get(position)));
+                showBottomSheet((int) adapter.getItemId(position)));
         binding.listViewCatalog.setOnItemLongClickListener((parent, v, position, id) -> {
-            confirmDelete(idList.get(position));
+            confirmDelete((int) adapter.getItemId(position));
             return true;
         });
 
@@ -178,6 +187,12 @@ public class GenericCatalogFragment extends Fragment {
                 adapter.getFilter().filter(s.toString());
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadData();
     }
 
     private void loadData() {

@@ -1,15 +1,13 @@
-package com.example.SmartGov;
+package com.example.smartgov;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Menu;
 import android.widget.Toast;
 
-import com.example.SmartGov.repository.SyncManager;
-import com.example.SmartGov.ui.LoginActivity;
-import com.example.SmartGov.utils.SessionManager;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.smartgov.repository.SyncManager;
+import com.example.smartgov.ui.LoginActivity;
+import com.example.smartgov.utils.SessionManager;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -19,7 +17,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.SmartGov.databinding.ActivityMainBinding;
+import com.example.smartgov.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,11 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
         sessionManager = new SessionManager(this);
         syncManager = new SyncManager(this);
-        wasOffline = !com.example.SmartGov.utils.NetworkUtils.isOnline(this);
+        wasOffline = !com.example.smartgov.utils.NetworkUtils.isOnline(this);
 
         // Corregir formatos de fechas guardados localmente para cumplir con ISO 8601 del Backend
         try {
-            com.example.SmartGov.database.DatabaseHelper dbHelper = new com.example.SmartGov.database.DatabaseHelper(this);
+            com.example.smartgov.database.DatabaseHelper dbHelper = new com.example.smartgov.database.DatabaseHelper(this);
             android.database.sqlite.SQLiteDatabase db = dbHelper.getWritableDatabase();
             db.execSQL("UPDATE documentos_ingresados SET fecha_hora_recepcion = replace(fecha_hora_recepcion, ' ', 'T') WHERE fecha_hora_recepcion LIKE '% %'");
             db.execSQL("UPDATE hojas_ruta_derivaciones SET fecha_hora_despacho = replace(fecha_hora_despacho, ' ', 'T') WHERE fecha_hora_despacho LIKE '% %'");
@@ -67,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_home, R.id.nav_registrar_documento,
                 R.id.nav_oficinas, R.id.nav_tipos_documentos,
                 R.id.nav_administrados, R.id.nav_personal,
-                R.id.nav_expedientes, R.id.nav_archivo_fisico)
+                R.id.nav_expedientes, R.id.nav_archivo_fisico, R.id.nav_direcciones, R.id.nav_documentos, R.id.nav_actas)
                 .setOpenableLayout(drawer)
                 .build();
 
@@ -131,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onAvailable(android.net.Network network) {
                     super.onAvailable(network);
                     // Validamos si venimos de offline y si realmente tenemos internet
-                    if (wasOffline && com.example.SmartGov.utils.NetworkUtils.isOnline(MainActivity.this)) {
+                    if (wasOffline && com.example.smartgov.utils.NetworkUtils.isOnline(MainActivity.this)) {
                         wasOffline = false;
                         runOnUiThread(() -> {
                             Toast.makeText(MainActivity.this, "Conexión restaurada. Sincronizando datos automáticamente...", Toast.LENGTH_LONG).show();

@@ -1,4 +1,4 @@
-package com.example.SmartGov.ui;
+package com.example.smartgov.ui;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -18,9 +18,9 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import com.example.SmartGov.R;
-import com.example.SmartGov.database.DatabaseHelper;
-import com.example.SmartGov.databinding.FragmentBandejaBinding;
+import com.example.smartgov.R;
+import com.example.smartgov.database.DatabaseHelper;
+import com.example.smartgov.databinding.FragmentBandejaBinding;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,9 +70,9 @@ public class BandejaDerivacionesFragment extends Fragment {
 
     private void refreshData() {
         loadDerivacionesFromLocalDb();
-        if (com.example.SmartGov.utils.NetworkUtils.isOnline(requireContext())) {
-            com.example.SmartGov.repository.SyncManager syncManager = new com.example.SmartGov.repository.SyncManager(requireContext());
-            syncManager.pullServerChanges(new com.example.SmartGov.repository.SyncManager.SyncCallback() {
+        if (com.example.smartgov.utils.NetworkUtils.isOnline(requireContext())) {
+            com.example.smartgov.repository.SyncManager syncManager = new com.example.smartgov.repository.SyncManager(requireContext());
+            syncManager.pullServerChanges(new com.example.smartgov.repository.SyncManager.SyncCallback() {
                 @Override
                 public void onSuccess(String msg) {
                     if (isAdded()) {

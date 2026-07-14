@@ -1,8 +1,11 @@
-package com.example.SmartGov.ui;
+package com.example.smartgov.ui;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import com.example.SmartGov.database.DatabaseHelper;
-import com.example.SmartGov.databinding.FragmentDetalleDerivacionBinding;
+import com.example.smartgov.database.DatabaseHelper;
+import com.example.smartgov.databinding.FragmentDetalleDerivacionBinding;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,8 +54,8 @@ public class DetalleDerivacionFragment extends Fragment {
         loadUbicacionesSpinner();
         loadDerivacionDetails();
 
-        binding.buttonRecibir.setOnClickListener(v -> updateDerivacionEstado("RECIBIDO", -12.046374, -77.042793));
-        binding.buttonRechazar.setOnClickListener(v -> updateDerivacionEstado("RECHAZADO", -12.046374, -77.042793));
+        binding.buttonRecibir.setOnClickListener(v -> updateDerivacionEstado("RECIBIDO"));
+        binding.buttonRechazar.setOnClickListener(v -> updateDerivacionEstado("RECHAZADO"));
         binding.buttonTomarFoto.setOnClickListener(v -> captureEvidenciaPhoto());
         binding.buttonConfirmarArchivar.setOnClickListener(v -> saveActaArchivamiento(v));
     }
@@ -126,21 +129,34 @@ public class DetalleDerivacionFragment extends Fragment {
         cursor.close();
     }
 
-    private void updateDerivacionEstado(String nuevoEstado, double lat, double lon) {
+    private double[] getCurrentLocation() {
+        LocationManager lm = (LocationManager) requireContext().getSystemService(Context.LOCATION_SERVICE);
+        double[] defaultLoc = {-12.046374, -77.042793};
+        if (lm == null) return defaultLoc;
+        try {
+            Location loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (loc == null) loc = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            if (loc != null) return new double[]{loc.getLatitude(), loc.getLongitude()};
+        } catch (SecurityException ignored) {}
+        return defaultLoc;
+    }
+
+    private void updateDerivacionEstado(String nuevoEstado) {
+        double[] loc = getCurrentLocation();
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("estado_derivacion", nuevoEstado);
-        cv.put("latitud", lat);
-        cv.put("longitud", lon);
+        cv.put("latitud", loc[0]);
+        cv.put("longitud", loc[1]);
         cv.put("sync_state", 1); 
 
         int rows = db.update(DatabaseHelper.TABLE_DERIVACIONES, cv, "id_derivacion = ?", new String[]{String.valueOf(idDerivacion)});
         if (rows > 0) {
             Toast.makeText(requireContext(), "Estado derivación actualizado a: " + nuevoEstado + " (GPS guardado)", Toast.LENGTH_SHORT).show();
             
-            if (com.example.SmartGov.utils.NetworkUtils.isOnline(requireContext())) {
-                com.example.SmartGov.repository.SyncManager syncManager = new com.example.SmartGov.repository.SyncManager(requireContext());
-                syncManager.pushLocalChanges(new com.example.SmartGov.repository.SyncManager.SyncCallback() {
+            if (com.example.smartgov.utils.NetworkUtils.isOnline(requireContext())) {
+                com.example.smartgov.repository.SyncManager syncManager = new com.example.smartgov.repository.SyncManager(requireContext());
+                syncManager.pushLocalChanges(new com.example.smartgov.repository.SyncManager.SyncCallback() {
                     @Override
                     public void onSuccess(String message) {
                         // Sincronizado
@@ -215,9 +231,9 @@ public class DetalleDerivacionFragment extends Fragment {
         if (success) {
             Toast.makeText(requireContext(), "Expediente Archivado exitosamente en Central", Toast.LENGTH_LONG).show();
             
-            if (com.example.SmartGov.utils.NetworkUtils.isOnline(requireContext())) {
-                com.example.SmartGov.repository.SyncManager syncManager = new com.example.SmartGov.repository.SyncManager(requireContext());
-                syncManager.pushLocalChanges(new com.example.SmartGov.repository.SyncManager.SyncCallback() {
+            if (com.example.smartgov.utils.NetworkUtils.isOnline(requireContext())) {
+                com.example.smartgov.repository.SyncManager syncManager = new com.example.smartgov.repository.SyncManager(requireContext());
+                syncManager.pushLocalChanges(new com.example.smartgov.repository.SyncManager.SyncCallback() {
                     @Override
                     public void onSuccess(String message) {
                         // Sincronizado

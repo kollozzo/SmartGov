@@ -1,4 +1,4 @@
-package com.example.SmartGov.ui;
+package com.example.smartgov.ui;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import com.example.SmartGov.database.DatabaseHelper;
-import com.example.SmartGov.databinding.FragmentRegistrarDocumentoBinding;
+import com.example.smartgov.database.DatabaseHelper;
+import com.example.smartgov.databinding.FragmentRegistrarDocumentoBinding;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -201,9 +201,9 @@ public class RegistrarDocumentoFragment extends Fragment {
         if (success) {
             Toast.makeText(requireContext(), "Documento registrado y asignado a Bandeja", Toast.LENGTH_SHORT).show();
             
-            if (com.example.SmartGov.utils.NetworkUtils.isOnline(requireContext())) {
-                com.example.SmartGov.repository.SyncManager syncManager = new com.example.SmartGov.repository.SyncManager(requireContext());
-                syncManager.pushLocalChanges(new com.example.SmartGov.repository.SyncManager.SyncCallback() {
+            if (com.example.smartgov.utils.NetworkUtils.isOnline(requireContext())) {
+                com.example.smartgov.repository.SyncManager syncManager = new com.example.smartgov.repository.SyncManager(requireContext());
+                syncManager.pushLocalChanges(new com.example.smartgov.repository.SyncManager.SyncCallback() {
                     @Override
                     public void onSuccess(String message) {
                         // Sincronización exitosa

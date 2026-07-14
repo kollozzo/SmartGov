@@ -1,4 +1,4 @@
-package com.example.SmartGov.utils;
+package com.example.smartgov.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

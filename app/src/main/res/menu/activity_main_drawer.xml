@@ -12,6 +12,10 @@
             android:id="@+id/nav_registrar_documento"
             android:icon="@android:drawable/ic_menu_add"
             android:title="Registrar Documento" />
+        <item
+            android:id="@+id/nav_documentos"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="Documentos" />
     </group>
 
     <group android:checkableBehavior="single">
@@ -39,6 +43,14 @@
             android:id="@+id/nav_archivo_fisico"
             android:icon="@android:drawable/ic_menu_gallery"
             android:title="Archivo Físico" />
+        <item
+            android:id="@+id/nav_direcciones"
+            android:icon="@android:drawable/ic_menu_mylocation"
+            android:title="Direcciones" />
+        <item
+            android:id="@+id/nav_actas"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="Actas" />
     </group>
 
     <group android:checkableBehavior="single">

@@ -1,4 +1,4 @@
-package com.example.SmartGov;
+package com.example.smartgov;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.example.SmartGov.model;
+package com.example.smartgov.model;
 
 public class AuthResponse {
     private String token;

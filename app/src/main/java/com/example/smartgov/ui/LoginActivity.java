@@ -1,4 +1,4 @@
-package com.example.SmartGov.ui;
+package com.example.smartgov.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,14 +7,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.SmartGov.MainActivity;
-import com.example.SmartGov.databinding.ActivityLoginBinding;
-import com.example.SmartGov.model.AuthRequest;
-import com.example.SmartGov.model.AuthResponse;
-import com.example.SmartGov.network.ApiService;
-import com.example.SmartGov.network.RetrofitClient;
-import com.example.SmartGov.utils.NetworkUtils;
-import com.example.SmartGov.utils.SessionManager;
+import com.example.smartgov.MainActivity;
+import com.example.smartgov.databinding.ActivityLoginBinding;
+import com.example.smartgov.model.AuthRequest;
+import com.example.smartgov.model.AuthResponse;
+import com.example.smartgov.network.ApiService;
+import com.example.smartgov.network.RetrofitClient;
+import com.example.smartgov.utils.NetworkUtils;
+import com.example.smartgov.utils.SessionManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;

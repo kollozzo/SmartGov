@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_page"
     android:padding="24dp"
-    tools:context="com.example.SmartGov.ui.LoginActivity">
+    tools:context="com.example.smartgov.ui.LoginActivity">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"

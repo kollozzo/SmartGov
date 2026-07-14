@@ -1,4 +1,4 @@
-package com.example.SmartGov.database;
+package com.example.smartgov.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "smartgov_local.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Nombre de las tablas
     public static final String TABLE_OFICINAS = "oficinas";
@@ -35,12 +35,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "id_oficina INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "codigo_oficina TEXT NOT NULL, " +
                 "siglas_oficiales TEXT NOT NULL, " +
-                "nombre_unidad TEXT NOT NULL)");
+                "nombre_unidad TEXT NOT NULL, " +
+                COLUMN_SYNC_STATE + " INTEGER DEFAULT 0)");
 
         // 2. Tipos de Documentos
         db.execSQL("CREATE TABLE " + TABLE_TIPOS_DOCUMENTOS + " (" +
                 "id_tipo_documento INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "nombre_tipo_documento TEXT NOT NULL)");
+                "nombre_tipo_documento TEXT NOT NULL, " +
+                COLUMN_SYNC_STATE + " INTEGER DEFAULT 0)");
 
         // 3. Administrados
         db.execSQL("CREATE TABLE " + TABLE_ADMINISTRADOS + " (" +
@@ -71,6 +73,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "nombre_completo TEXT NOT NULL, " +
                 "cargo TEXT NOT NULL, " +
                 "id_oficina INTEGER NOT NULL, " +
+                COLUMN_SYNC_STATE + " INTEGER DEFAULT 0, " +
                 "FOREIGN KEY(id_oficina) REFERENCES " + TABLE_OFICINAS + "(id_oficina))");
 
         // 6. Expedientes Generales
@@ -121,7 +124,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "codigo_almacen TEXT NOT NULL, " +
                 "nro_pabellon INTEGER NOT NULL, " +
                 "nro_estante INTEGER NOT NULL, " +
-                "nro_caja_fisica INTEGER NOT NULL)");
+                "nro_caja_fisica INTEGER NOT NULL, " +
+                COLUMN_SYNC_STATE + " INTEGER DEFAULT 0)");
 
         // 10. Actas Archivamiento (Con Foto Multimedia)
         db.execSQL("CREATE TABLE " + TABLE_ACTAS + " (" +
@@ -141,16 +145,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACTAS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ARCHIVO_FISICO);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DERIVACIONES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DOCUMENTOS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXPEDIENTES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PERSONAL);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DIRECCIONES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADMINISTRADOS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TIPOS_DOCUMENTOS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_OFICINAS);
-        onCreate(db);
+        if (oldVersion < 2) {
+            db.execSQL("ALTER TABLE " + TABLE_OFICINAS + " ADD COLUMN " + COLUMN_SYNC_STATE + " INTEGER DEFAULT 0");
+            db.execSQL("ALTER TABLE " + TABLE_TIPOS_DOCUMENTOS + " ADD COLUMN " + COLUMN_SYNC_STATE + " INTEGER DEFAULT 0");
+            db.execSQL("ALTER TABLE " + TABLE_PERSONAL + " ADD COLUMN " + COLUMN_SYNC_STATE + " INTEGER DEFAULT 0");
+            db.execSQL("ALTER TABLE " + TABLE_ARCHIVO_FISICO + " ADD COLUMN " + COLUMN_SYNC_STATE + " INTEGER DEFAULT 0");
+        }
     }
 }

@@ -1,7 +1,7 @@
-package com.example.SmartGov.network;
+package com.example.smartgov.network;
 
 import android.content.Context;
-import com.example.SmartGov.utils.SessionManager;
+import com.example.smartgov.utils.SessionManager;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;

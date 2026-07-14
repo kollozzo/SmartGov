@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.SmartGov"
+    namespace = "com.example.smartgov"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.SmartGov"
+        applicationId = "com.example.smartgov"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
