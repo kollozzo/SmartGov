@@ -119,21 +119,6 @@
                     android:layout_height="48dp"
                     android:layout_marginTop="4dp" />
 
-                <TextView
-                    android:id="@+id/labelPrioridad"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Prioridad de Envío:"
-                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-                    android:textColor="@color/md_on_surface" />
-
-                <Spinner
-                    android:id="@+id/spinnerPrioridad"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="4dp" />
-
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/buttonGuardarDocumento"
                     style="@style/Widget.Material3.Button"

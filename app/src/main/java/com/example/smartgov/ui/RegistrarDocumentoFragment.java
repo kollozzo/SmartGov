@@ -29,7 +29,6 @@ public class RegistrarDocumentoFragment extends Fragment {
     private List<Integer> idExpedientesList = new ArrayList<>();
     private List<Integer> idTiposList = new ArrayList<>();
     private List<Integer> idAdministradosList = new ArrayList<>();
-    private String[] prioridadValues = {"ALTA", "MEDIA", "BAJA"};
 
     @Nullable
     @Override
@@ -128,9 +127,6 @@ public class RegistrarDocumentoFragment extends Fragment {
         }
         cAdm.close();
         binding.spinnerAdministrado.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_dropdown_item, administradosNames));
-
-        // 4. Cargar Prioridad
-        binding.spinnerPrioridad.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_dropdown_item, prioridadValues));
     }
 
     private void saveDocumento(View view) {
@@ -161,7 +157,6 @@ public class RegistrarDocumentoFragment extends Fragment {
         int idExpediente = idExpedientesList.get(binding.spinnerExpediente.getSelectedItemPosition());
         int idTipoDoc = idTiposList.get(binding.spinnerTipoDocumento.getSelectedItemPosition());
         int idAdministrado = idAdministradosList.get(binding.spinnerAdministrado.getSelectedItemPosition());
-        String prioridad = prioridadValues[binding.spinnerPrioridad.getSelectedItemPosition()];
 
         String fechaActual = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).format(new Date());
 
@@ -187,7 +182,7 @@ public class RegistrarDocumentoFragment extends Fragment {
                 cvDer.put("id_empleado_assigned", 1); // Especialista default
                 cvDer.put("id_oficina_procedencia", 1); // Oficina default
                 cvDer.put("fecha_hora_despacho", fechaActual);
-                cvDer.put("prioridad_envio", prioridad);
+                cvDer.put("prioridad_envio", "ALTA");
                 cvDer.put("estado_derivacion", "PENDIENTE");
                 cvDer.put("sync_state", 1); // Pendiente de sincronizar
 
