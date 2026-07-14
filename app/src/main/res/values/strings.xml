@@ -10,4 +10,25 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string-array name="prioridad_envio_values">
+        <item>ALTA</item>
+        <item>MEDIA</item>
+        <item>BAJA</item>
+    </string-array>
+
+    <string-array name="estado_derivacion_values">
+        <item>PENDIENTE</item>
+        <item>RECIBIDO</item>
+        <item>RECHAZADO</item>
+        <item>DERIVADO</item>
+        <item>ARCHIVADO</item>
+    </string-array>
+
+    <string-array name="estado_expediente_values">
+        <item>PENDIENTE</item>
+        <item>EN_PROCESO</item>
+        <item>DERIVADO</item>
+        <item>FINALIZADO</item>
+    </string-array>
 </resources>
