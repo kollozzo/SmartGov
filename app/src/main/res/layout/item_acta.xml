@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginVertical="5dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/card_surface"
+    app:strokeColor="@color/divider"
+    app:strokeWidth="0.5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/textNroActa"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="ACT-1744567890"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            android:textColor="@color/md_on_surface"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textDerivacionUbicacion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Der: TRK-001928 ┬À Alm: ALM-PRINCIPAL"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            android:textColor="@color/md_on_surface_variant"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textNroActa" />
+
+        <TextView
+            android:id="@+id/textFechaCosto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="2026-07-13  |  Costo: S/. 17.50"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:textColor="@color/md_outline"
+            app:layout_constraintEnd_toStartOf="@id/imageSyncStatus"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textDerivacionUbicacion" />
+
+        <ImageView
+            android:id="@+id/imageSyncStatus"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:contentDescription="Sync Status"
+            android:src="@android:drawable/stat_sys_upload_done"
+            app:layout_constraintBottom_toBottomOf="@id/textFechaCosto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textFechaCosto"
+            app:tint="#4CAF50" />
+
+        <TextView
+            android:id="@+id/textSyncStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="Sincronizado"
+            android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+            android:textColor="#4CAF50"
+            app:layout_constraintBottom_toBottomOf="@id/imageSyncStatus"
+            app:layout_constraintEnd_toStartOf="@id/imageSyncStatus"
+            app:layout_constraintTop_toTopOf="@id/imageSyncStatus" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
